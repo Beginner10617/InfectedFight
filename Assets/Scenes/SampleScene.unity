@@ -5818,8 +5818,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd79f817dd424495889cae98f617e590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementStep: 0.75
-  rotationStep: 0.75
+  movementSpeed: 0.75
+  strafeSpeed: 0.1
+  rotationSpeed: 1
 --- !u!58 &1229455144
 CircleCollider2D:
   m_ObjectHideFlags: 0
