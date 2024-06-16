@@ -18,12 +18,6 @@ public class playerMovement : MonoBehaviour
     void MoveBackward(){
         GetComponent<Rigidbody2D>().position -= new Vector2(transform.right.x, transform.right.y) * movementStep;
     }
-    void MoveRightward(){
-        GetComponent<Rigidbody2D>().position -= new Vector2(transform.up.x, transform.up.y) * movementStep;
-    }
-    void MoveLeftward(){
-        GetComponent<Rigidbody2D>().position += new Vector2(transform.up.x, transform.up.y) * movementStep;
-    }
     void RotateRight(){
         transform.Rotate(0, 0, -rotationStep);
     }
@@ -40,10 +34,10 @@ public class playerMovement : MonoBehaviour
             MoveBackward();
         }
         if(Input.GetKey(KeyCode.RightArrow)){
-            MoveRightward();
+            RotateRight();
         }
         if(Input.GetKey(KeyCode.LeftArrow)){
-            MoveLeftward();
+            RotateLeft();
         }
         if(Input.GetKey(KeyCode.W)){
             MoveForward();
@@ -51,16 +45,10 @@ public class playerMovement : MonoBehaviour
         if(Input.GetKey(KeyCode.S)){
             MoveBackward();
         }
-        if(Input.GetKey(KeyCode.D)){
-            MoveRightward();
-        }
         if(Input.GetKey(KeyCode.A)){
-            MoveLeftward();
-        }
-        if(Input.GetKey(KeyCode.Q)){
             RotateLeft();
         }
-        if(Input.GetKey(KeyCode.E)){
+        if(Input.GetKey(KeyCode.D)){
             RotateRight();
         }
     }
