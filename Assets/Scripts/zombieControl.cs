@@ -65,7 +65,10 @@ public class zombieControl : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        if(hitpoint <= 0){
+
+        }
         if(isRotating == false && isAttacking == false){
             MoveForward();
         }

@@ -34,7 +34,6 @@ public class playerMovement : MonoBehaviour
 
     void MoveForward(){
         rigidBody.position += new Vector2(transform.right.x, transform.right.y) * movementSpeed * Time.deltaTime;        
-        animator.SetFloat("isWalking", 1f);
         if(movementSpeed == slowwalkSpeed){
             feetAnim.SetFloat("isWalking", 1f);
         }
@@ -45,7 +44,6 @@ public class playerMovement : MonoBehaviour
     }
     void MoveBackward(){
         rigidBody.position -= new Vector2(transform.right.x, transform.right.y) * movementSpeed * Time.deltaTime;
-        animator.SetFloat("isWalking", 1f);
         if(movementSpeed == slowwalkSpeed){
             feetAnim.SetFloat("isWalking", 1f);
         }
@@ -62,12 +60,10 @@ public class playerMovement : MonoBehaviour
     }
     void StrafeRight(){
         rigidBody.position -= new Vector2(transform.up.x, transform.up.y) * strafeSpeed * Time.deltaTime;
-        animator.SetFloat("isWalking", 0f);
-        feetAnim.SetFloat("isWalking", 2f);
-    }
+        feetAnim.SetFloat("isWalking", 2f);       
+        }
     void StrafeLeft(){
         rigidBody.position += new Vector2(transform.up.x, transform.up.y) * strafeSpeed * Time.deltaTime;
-        animator.SetFloat("isWalking", 0f);
         feetAnim.SetFloat("isWalking", 3f);
     }
     // Update is called once per frame
@@ -87,64 +83,80 @@ public class playerMovement : MonoBehaviour
         else if(Input.GetKeyUp(KeyCode.RightShift)){
             movementSpeed = slowwalkSpeed;
         }
+        //animations
+        if(enableArrow){
+            if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)){
+                animator.SetFloat("isWalking", 1f);
+            }
+            else if(Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow)){
+                animator.SetFloat("isWalking", 0f);
+                feetAnim.SetFloat("isWalking", 0f);
+            }
+            if(Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                animator.SetFloat("isWalking", 0f);
+            }
+            else if(Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                animator.SetFloat("isWalking", 0f);
+                }
+            else if(Input.GetKeyUp(KeyCode.LeftArrow)||Input.GetKeyUp(KeyCode.RightArrow)){
+                animator.SetFloat("isWalking", 0f);
+                feetAnim.SetFloat("isWalking", 0f);
+            }
+        }
+        else{
+              if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)){
+                animator.SetFloat("isWalking", 1f);
+            }
+            else if(Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S)){
+                animator.SetFloat("isWalking", 0f);
+                feetAnim.SetFloat("isWalking", 0f);
+            }
+            if(Input.GetKeyDown(KeyCode.A))
+            {
+                animator.SetFloat("isWalking", 0f);
+                feetAnim.SetFloat("isWalking", 3f);
+            }
+            else if(Input.GetKeyDown(KeyCode.D))
+            {
+                animator.SetFloat("isWalking", 0f);
+                feetAnim.SetFloat("isWalking", 2f);
+            }
+            else if(Input.GetKeyUp(KeyCode.A)||Input.GetKeyUp(KeyCode.D)){
+                animator.SetFloat("isWalking", 0f);
+                feetAnim.SetFloat("isWalking", 0f);
+            }
+        }
+
+        //movements
         if(enableArrow){
             if(Input.GetKey(KeyCode.UpArrow)){
                 MoveForward();
             }
-            else if(Input.GetKeyUp(KeyCode.UpArrow)){
-                animator.SetFloat("isWalking", 0f);
-                feetAnim.SetFloat("isWalking", 0f);
-            }
             if(Input.GetKey(KeyCode.DownArrow)){
                 MoveBackward();
-            }
-            else if(Input.GetKeyUp(KeyCode.DownArrow)){
-                animator.SetFloat("isWalking", 0f);
-                feetAnim.SetFloat("isWalking", 0f);
             }
             if(Input.GetKey(KeyCode.RightArrow)){
                 StrafeRight();
             }
-            else if(Input.GetKeyUp(KeyCode.RightArrow)){
-                animator.SetFloat("isWalking", 0f);
-                feetAnim.SetFloat("isWalking", 0f);
-            }
+            
             if(Input.GetKey(KeyCode.LeftArrow)){
                 StrafeLeft();
-            }
-            else if(Input.GetKeyUp(KeyCode.LeftArrow)){
-                animator.SetFloat("isWalking", 0f);
-                feetAnim.SetFloat("isWalking", 0f);
             }
         }
         else{
             if(Input.GetKey(KeyCode.W)){
                 MoveForward();
             }
-            else if(Input.GetKeyUp(KeyCode.W)){
-                animator.SetFloat("isWalking", 0f);
-                animator.SetFloat("isWalking", 0f);
-            }
             if(Input.GetKey(KeyCode.S)){
                 MoveBackward();
-            }
-            else if(Input.GetKeyUp(KeyCode.S)){
-                animator.SetFloat("isWalking", 0f);
-                animator.SetFloat("isWalking", 0f);
             }
             if(Input.GetKey(KeyCode.D)){
                 StrafeRight();
             }
-            else if(Input.GetKeyUp(KeyCode.D)){
-                animator.SetFloat("isWalking", 0f);
-                feetAnim.SetFloat("isWalking", 0f);
-            }
             if(Input.GetKey(KeyCode.A)){
                 StrafeLeft();
-            }
-            else if(Input.GetKeyUp(KeyCode.A)){
-                animator.SetFloat("isWalking", 0f);
-                feetAnim.SetFloat("isWalking", 0f);
             }
         }
         if(Input.GetKey(KeyCode.Q)){
@@ -153,5 +165,6 @@ public class playerMovement : MonoBehaviour
         if(Input.GetKey(KeyCode.E)){
             RotateRight();
         }
+
     }
 }
