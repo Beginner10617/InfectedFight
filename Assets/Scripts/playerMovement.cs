@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class playerMovement : MonoBehaviour
 {
+    GameObject UpperBody;
+    GameObject LowerBody;
     Animator animator;
     Animator feetAnim;
     Rigidbody2D rigidBody;
@@ -16,8 +18,16 @@ public class playerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
-        feetAnim = transform.GetChild(0).gameObject.GetComponent<Animator>();
+        UpperBody = GameObject.FindWithTag("UpperBody");
+        if (UpperBody == null) {
+            Debug.Log("UpperBody not found by camera");
+        }
+        animator = UpperBody.GetComponent<Animator>();
+        LowerBody = GameObject.FindWithTag("LowerBody");
+        if (LowerBody == null) {
+            Debug.Log("LowerBody not found by camera");
+        }
+        feetAnim = LowerBody.GetComponent<Animator>();
         rigidBody= GetComponent<Rigidbody2D>();
         slowwalkSpeed = movementSpeed;
     }
