@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public float hitpoint;
     Animator animator;
     bool canAttack;
-    bool animating;
+    public bool animating;
     public float damage;// damage per second
     
     void Start()
@@ -26,7 +26,6 @@ public class PlayerHealth : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.CompareTag("Zombie")){
             canAttack = true;
-            Debug.Log("Zombie in Attack range");
             Zombie = col.gameObject;
         }
     }
