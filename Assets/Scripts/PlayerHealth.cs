@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    GameObject UpperBody;
+    public GameObject UpperBody;
     GameObject Zombie;
+    public Transform handgunTransform;
     public float hitpoint;
-    Animator animator;
-    bool canAttack;
+    public Animator animator;
+    public bool canAttack;
     public bool handGunAcquired;
+    public int Ammos;
     public bool animating;
     public float knifeDamage;// knifeDamage per second
+    public float handGunDamage;
     public float damage;
     
     void Start()
@@ -27,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D col){
-        if(col.gameObject.CompareTag("Zombie")){
+        if(col.gameObject.CompareTag("Zombie") && handGunAcquired == false){
             canAttack = true;
             Zombie = col.gameObject;
         }
@@ -35,7 +38,7 @@ public class PlayerHealth : MonoBehaviour
 
 
     void OnTriggerExit2D(Collider2D col){
-        if(col.gameObject.CompareTag("Zombie")){
+        if(col.gameObject.CompareTag("Zombie") && handGunAcquired == false){
             canAttack = false;
         }
     }
@@ -52,7 +55,38 @@ public class PlayerHealth : MonoBehaviour
         UpperBody.transform.localPosition = new Vector3(0,0,0);
         animator.SetFloat("isWalking", 0f);
     }
-    // Update is called once per frame
+    
+    void Shoot(){
+        animating = true;
+        Ammos -=1;
+        animator.SetFloat("isWalking", 2f);
+    }
+    void stopShoot(){
+        animating = false;
+        animator.SetFloat("isWalking", 0f);
+    }
+    void FixedUpdate()
+    {
+        if(handGunAcquired)
+        {   if(damage != handGunDamage){damage = handGunDamage;}
+            float distance = 10f;
+            RaycastHit2D hitZombie = Physics2D.Raycast(handgunTransform.position, new Vector2(transform.right.x, transform.right.y));
+            Debug.DrawRay(handgunTransform.position, new Vector2(transform.right.x, transform.right.y) * hitZombie.distance, Color.red );
+            //drawing Aim
+            handgunTransform.GetChild(0).localScale = new Vector3(hitZombie.distance/0.8f, 1f, 1f);
+            handgunTransform.GetChild(0).localPosition = new Vector3(hitZombie.distance/1.6f, 0, 0f);
+            if(hitZombie.collider.gameObject.CompareTag("Zombie") && canAttack == false)
+            {
+                canAttack = true;
+                Zombie = hitZombie.collider.gameObject;
+            }
+            else if (hitZombie.collider.gameObject.CompareTag("Zombie") == false && canAttack)
+            {
+                canAttack = false;
+            }
+        }   
+    }
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space) && animating == false){
@@ -60,12 +94,13 @@ public class PlayerHealth : MonoBehaviour
                 Zombie.GetComponent<zombieControl>().hitpoint -= damage;
             }
             if(handGunAcquired){
-                //...
+                Shoot();
+                Invoke("stopShoot", 0.184f);
             }
             else{
                 KnifeAttack();
+                Invoke("stopAttack", 1);
             }
-            Invoke("stopAttack", 1);
         }
     }
 }

@@ -18,6 +18,9 @@ public class collectible : MonoBehaviour
         if(col.gameObject.CompareTag("Player")){
             present = false;
             col.gameObject.GetComponent<PlayerHealth>().handGunAcquired = true;
+            col.gameObject.GetComponent<PlayerHealth>().UpperBody = col.gameObject.GetComponent<playerMovement>().UpperBody2;
+            col.gameObject.GetComponent<PlayerHealth>().animator = col.gameObject.GetComponent<PlayerHealth>().UpperBody.GetComponent<Animator>();
+            Destroy(col.gameObject.GetComponent<BoxCollider2D>());
         }
     }
     // Update is called once per frame

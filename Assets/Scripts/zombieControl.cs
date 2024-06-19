@@ -71,7 +71,7 @@ public class zombieControl : MonoBehaviour
 
     void Update()
     {   
-        if(player.GetComponent<PlayerHealth>().animating && healthBar.activeSelf == false){
+        if(player.GetComponent<PlayerHealth>().animating && healthBar.activeSelf == false && player.GetComponent<PlayerHealth>().canAttack){
             healthBar.SetActive(true);
         }
         else if (player.GetComponent<PlayerHealth>().animating==false && healthBar.activeSelf){
