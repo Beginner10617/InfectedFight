@@ -5,6 +5,7 @@ using UnityEngine;
 public class playerMovement : MonoBehaviour
 {
     GameObject UpperBody;
+    GameObject UpperBody2;
     GameObject LowerBody;
     Animator animator;
     Animator feetAnim;
@@ -22,7 +23,12 @@ public class playerMovement : MonoBehaviour
         if (UpperBody == null) {
             Debug.Log("UpperBody not found by camera");
         }
+        UpperBody2 = GameObject.FindWithTag("UpperBody2");
+        if (UpperBody2 == null) {
+            Debug.Log("UpperBody2 not found by camera");
+        }
         animator = UpperBody.GetComponent<Animator>();
+        UpperBody2.SetActive(false);
         LowerBody = GameObject.FindWithTag("LowerBody");
         if (LowerBody == null) {
             Debug.Log("LowerBody not found by camera");
@@ -69,6 +75,11 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GetComponent<PlayerHealth>().handGunAcquired){
+            UpperBody.SetActive(false);
+            UpperBody2.SetActive(true);
+            animator = UpperBody2.GetComponent<Animator>();
+        }
         if(Input.GetKeyDown(KeyCode.LeftShift))
         {
             movementSpeed = fastwalkSpeed;

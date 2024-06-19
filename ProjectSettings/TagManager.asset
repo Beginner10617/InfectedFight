@@ -8,6 +8,8 @@ TagManager:
   - Zombie
   - UpperBody
   - LowerBody
+  - HandGun
+  - UpperBody2
   layers:
   - Default
   - TransparentFX

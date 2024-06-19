@@ -9,17 +9,20 @@ public class PlayerHealth : MonoBehaviour
     public float hitpoint;
     Animator animator;
     bool canAttack;
+    public bool handGunAcquired;
     public bool animating;
-    public float damage;// damage per second
+    public float knifeDamage;// knifeDamage per second
+    public float damage;
     
     void Start()
     {        
+        handGunAcquired = false;
         UpperBody = GameObject.FindWithTag("UpperBody");
         if (UpperBody == null) {
             Debug.Log("UpperBody not found by camera");
         }
         animator = UpperBody.GetComponent<Animator>();
-
+        damage = knifeDamage;
         canAttack = false;
     }
 
@@ -37,7 +40,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void Attack(){
+    void KnifeAttack(){
         animating = true;
         UpperBody.transform.localPosition = new Vector3(0.185f, -0.303f, 0f);
         animator.SetFloat("isWalking", 2f);
@@ -56,7 +59,12 @@ public class PlayerHealth : MonoBehaviour
             if(canAttack){
                 Zombie.GetComponent<zombieControl>().hitpoint -= damage;
             }
-            Attack();
+            if(handGunAcquired){
+                //...
+            }
+            else{
+                KnifeAttack();
+            }
             Invoke("stopAttack", 1);
         }
     }
