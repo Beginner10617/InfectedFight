@@ -84,6 +84,7 @@ public class zombieControl : MonoBehaviour
             player.GetComponent<PlayerHealth>().hitpoint -= damage * Time.deltaTime;
         }
         if(hitpoint <= 0){
+            movementSpeed = 0f;
             animator.SetFloat("isWalking", 0f);
             renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, renderer.color.a - Time.deltaTime);
             if(renderer.color.a <= 0){
