@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public GameObject UpperBody;
+    AudioManager audioManager;
     GameObject Zombie;
     public Transform handgunTransform;
     public float hitpoint;
@@ -27,12 +28,14 @@ public class PlayerHealth : MonoBehaviour
         animator = UpperBody.GetComponent<Animator>();
         damage = knifeDamage;
         canAttack = false;
+        audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.CompareTag("Zombie") && handGunAcquired == false){
             canAttack = true;
             Zombie = col.gameObject;
+            
         }
     }
 
@@ -45,6 +48,9 @@ public class PlayerHealth : MonoBehaviour
 
     void KnifeAttack(){
         animating = true;
+        if(audioManager.Weapon.isPlaying == false){
+            audioManager.WeaponPlayAudio(audioManager.knife);        
+        }
         UpperBody.transform.localPosition = new Vector3(0.185f, -0.303f, 0f);
         animator.SetFloat("isWalking", 2f);
         
@@ -58,6 +64,9 @@ public class PlayerHealth : MonoBehaviour
     
     void Shoot(){
         animating = true;
+        if(audioManager.Weapon.isPlaying == false){
+            audioManager.WeaponPlayAudio(audioManager.gunFire);        
+        }
         Ammos -=1;
         animator.SetFloat("isWalking", 2f);
     }
@@ -89,7 +98,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && animating == false){
+        if(Input.GetKeyDown(KeyCode.Space) && animating == false && audioManager.Weapon.isPlaying == false){
             if(canAttack){
                 Zombie.GetComponent<zombieControl>().hitpoint -= damage;
             }

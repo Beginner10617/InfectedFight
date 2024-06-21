@@ -10,6 +10,7 @@ TagManager:
   - LowerBody
   - HandGun
   - UpperBody2
+  - AudioManager
   layers:
   - Default
   - TransparentFX

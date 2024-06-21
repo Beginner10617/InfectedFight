@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class playerMovement : MonoBehaviour
 {
+    AudioManager audioManager;
     GameObject UpperBody;
     public GameObject UpperBody2;
     GameObject LowerBody;
@@ -15,7 +16,7 @@ public class playerMovement : MonoBehaviour
     public float fastwalkSpeed = 1.5f;
     public float slowwalkSpeed;
     public float strafeSpeed = 0.6f;
-    public float rotationSpeed = 1f;
+    public float rotationSpeed = 90f;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +37,7 @@ public class playerMovement : MonoBehaviour
         feetAnim = LowerBody.GetComponent<Animator>();
         rigidBody= GetComponent<Rigidbody2D>();
         slowwalkSpeed = movementSpeed;
+        audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     void MoveForward(){
@@ -45,7 +47,10 @@ public class playerMovement : MonoBehaviour
         }
         else if(movementSpeed == fastwalkSpeed){
             feetAnim.SetFloat("isWalking", 4f);
-
+        }
+        if(audioManager.Player.isPlaying == false)
+        {
+        audioManager.PlayerPlayAudio(audioManager.walk1);
         }
     }
     void MoveBackward(){
@@ -55,7 +60,10 @@ public class playerMovement : MonoBehaviour
         }
         else if(movementSpeed == fastwalkSpeed){
             feetAnim.SetFloat("isWalking", 4f);
-
+        }
+        if(audioManager.Player.isPlaying == false)
+        {
+        audioManager.PlayerPlayAudio(audioManager.walk1);
         }
     }
     void RotateRight(){
@@ -66,11 +74,19 @@ public class playerMovement : MonoBehaviour
     }
     void StrafeRight(){
         rigidBody.position -= new Vector2(transform.up.x, transform.up.y) * strafeSpeed * Time.deltaTime;
-        feetAnim.SetFloat("isWalking", 2f);       
+        feetAnim.SetFloat("isWalking", 2f);     
+        if(audioManager.Player.isPlaying == false)
+        {
+            audioManager.PlayerPlayAudio(audioManager.walk1);
+        }
         }
     void StrafeLeft(){
         rigidBody.position += new Vector2(transform.up.x, transform.up.y) * strafeSpeed * Time.deltaTime;
         feetAnim.SetFloat("isWalking", 3f);
+        if(audioManager.Player.isPlaying == false)
+        {
+            audioManager.PlayerPlayAudio(audioManager.walk1);
+        }
     }
     // Update is called once per frame
     void Update()

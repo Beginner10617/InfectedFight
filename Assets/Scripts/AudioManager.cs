@@ -8,20 +8,24 @@ public class AudioManager : MonoBehaviour
     [Header("Audio Sources")]
     public AudioSource Background;
     public AudioSource Player;
+    public AudioSource Weapon;
     public AudioSource Zombie;
     [Header("Audio Clips")]
     public AudioClip walk1;
-    public AudioClip walk2;
+//    public AudioClip walk2;
     public AudioClip gunFire;
     public AudioClip knife;
-    void Start()
-    {
-        
+
+    public void PlayerPlayAudio(AudioClip input){
+        Player.PlayOneShot(input);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void WeaponPlayAudio(AudioClip input){
+        Weapon.PlayOneShot(input);
     }
+    
+    void ZombiePlayAudio(AudioClip input){
+        Player.PlayOneShot(input);
+    }
+
 }
