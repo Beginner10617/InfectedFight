@@ -9,13 +9,19 @@ public class AudioManager : MonoBehaviour
     public AudioSource Background;
     public AudioSource Player;
     public AudioSource Weapon;
-    public AudioSource Zombie;
     [Header("Audio Clips")]
     public AudioClip walk1;
-//    public AudioClip walk2;
     public AudioClip gunFire;
     public AudioClip knife;
-
+    public List<AudioClip> Zombie_roar;
+    public AudioClip ZombieDeath;
+    public AudioClip PlayerHurt;
+    public AudioClip PlayerDeath;
+    System.Random rnd;
+    void Start()
+    {
+        rnd = new System.Random();
+    }
     public void PlayerPlayAudio(AudioClip input){
         Player.PlayOneShot(input);
     }
@@ -24,8 +30,5 @@ public class AudioManager : MonoBehaviour
         Weapon.PlayOneShot(input);
     }
     
-    void ZombiePlayAudio(AudioClip input){
-        Player.PlayOneShot(input);
-    }
 
 }

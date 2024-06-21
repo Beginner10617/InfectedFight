@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 public class zombieControl : MonoBehaviour
 {
+    Camera MainCamera;
     Animator animator;
     bool isRotating;
     bool isAttacking;
@@ -16,6 +17,10 @@ public class zombieControl : MonoBehaviour
     public float hitpoint;
     public float damage;// damage per second
     SpriteRenderer renderer;
+    AudioManager audioManager;
+    AudioSource audioSource;
+    int NumberOfRoarClips;
+    bool DeathAudioPlayed;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +36,11 @@ public class zombieControl : MonoBehaviour
         animator = GetComponent<Animator>();
         rotationSpeed = 90;
         rnd = new System.Random();
+        audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
+        NumberOfRoarClips = audioManager.Zombie_roar.Count;
+        MainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        audioSource = GetComponent<AudioSource>();
+        DeathAudioPlayed = false;
     }
 
     void OnTriggerEnter2D(Collider2D col){
@@ -68,6 +78,7 @@ public class zombieControl : MonoBehaviour
         rigidBody.position += new Vector2(transform.right.x, transform.right.y) * movementSpeed * Time.deltaTime;        
         
     }
+    
 
     void Update()
     {   
@@ -89,6 +100,22 @@ public class zombieControl : MonoBehaviour
             renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, renderer.color.a - Time.deltaTime);
             if(renderer.color.a <= 0){
                 Destroy(gameObject);
+            }
+            if(DeathAudioPlayed = false)
+            {
+                audioSource.PlayOneShot(audioManager.ZombieDeath);
+                DeathAudioPlayed = true;
+            }
+        }
+        Vector3 ViewLocation = MainCamera.WorldToViewportPoint(transform.position);
+        if(ViewLocation.x < 1 && ViewLocation.x > 0 && hitpoint > 0)
+        {
+            if(ViewLocation.y < 1 && ViewLocation.y > 0)
+            {
+                if(audioSource.isPlaying == false)
+                {
+                    audioSource.PlayOneShot(audioManager.Zombie_roar[rnd.Next(NumberOfRoarClips)]);
+                }
             }
         }
         healthBar.transform.localPosition = new Vector3(healthBar.transform.localPosition.x, - (100 - hitpoint)/200 * 1.5f , 0);

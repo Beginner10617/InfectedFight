@@ -5755,7 +5755,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.489
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5799,7 +5799,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5890,10 +5890,37 @@ MonoBehaviour:
   Background: {fileID: 1941511961}
   Player: {fileID: 327830617}
   Weapon: {fileID: 2080169249}
-  Zombie: {fileID: 640581931}
   walk1: {fileID: 8300000, guid: 0afd8e7e717224a87bd042a4999151e8, type: 3}
   gunFire: {fileID: 8300000, guid: b8996e60a5e8b45fa9fedd2463697082, type: 3}
   knife: {fileID: 8300000, guid: 8d2c502105b164725b11d14c81389d88, type: 3}
+  Zombie_roar:
+  - {fileID: 8300000, guid: e5b65aab8edb9448886d257ad77db815, type: 3}
+  - {fileID: 8300000, guid: d7d06158df2ed4b6b8affd695098ba35, type: 3}
+  - {fileID: 8300000, guid: 2183a7470e14c4ee680a06468a8aaf61, type: 3}
+  - {fileID: 8300000, guid: ec0d7c875d701418c9dcbdfffe396c5e, type: 3}
+  - {fileID: 8300000, guid: 4c8a78ef13aa644019adb40f430f20d2, type: 3}
+  - {fileID: 8300000, guid: 92862d8a937384073a5c9d7df08d08ae, type: 3}
+  - {fileID: 8300000, guid: 1dd69dabdcce544b791d5af86f5dbe87, type: 3}
+  - {fileID: 8300000, guid: a67ab0b3c484c4a2caa086bfb884d0c9, type: 3}
+  - {fileID: 8300000, guid: ee33709f9d9e647abb8943b3cdaf6ad5, type: 3}
+  - {fileID: 8300000, guid: 6fdf99556cddf4dd1b00ec081dccaf74, type: 3}
+  - {fileID: 8300000, guid: 60faccefd6283449db615fb1ea68b902, type: 3}
+  - {fileID: 8300000, guid: 3dafdf53955164d00b9560ff76bf62ce, type: 3}
+  - {fileID: 8300000, guid: 4640b4a51932a400fb723d32568e678d, type: 3}
+  - {fileID: 8300000, guid: 73f6a36cdb021463a96e7e92c6277d4d, type: 3}
+  - {fileID: 8300000, guid: aa52871928cca41cd85a83e2046803a4, type: 3}
+  - {fileID: 8300000, guid: 2734024a7fae54063b7870ea6449d35e, type: 3}
+  - {fileID: 8300000, guid: c5d9cad4313264cff8d68b4aed075c13, type: 3}
+  - {fileID: 8300000, guid: 36e86106ee07a48c8b0947410c3f6d95, type: 3}
+  - {fileID: 8300000, guid: cc9427dae2b2a408e981cb462b4df81c, type: 3}
+  - {fileID: 8300000, guid: 6ec70cfedab5c4d2284daf0318aa69fd, type: 3}
+  - {fileID: 8300000, guid: f0bf3ee4a7d35441d969a1b86eddefd4, type: 3}
+  - {fileID: 8300000, guid: 8dc2cd6d9445b407c83f5b3fe5e79884, type: 3}
+  - {fileID: 8300000, guid: ebbf12a6a78044ba7aafe7b8afae4d7b, type: 3}
+  - {fileID: 8300000, guid: 77111be6345b24aa98fb3643a30713fc, type: 3}
+  ZombieDeath: {fileID: 8300000, guid: 48fe7d4f9d2424401ad87b926f9345bf, type: 3}
+  PlayerHurt: {fileID: 8300000, guid: 687d89768d7c648c58b2f063ddcfeccf, type: 3}
+  PlayerDeath: {fileID: 8300000, guid: 946126b40600e43da9b393bb1cfd854f, type: 3}
 --- !u!1 &1619575917
 GameObject:
   m_ObjectHideFlags: 0
@@ -6151,7 +6178,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 1
 --- !u!50 &1859741409
 Rigidbody2D:
   serializedVersion: 4
@@ -6570,10 +6597,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5722145485462452398, guid: 67617ea127fd9412abf9da43106ac6db, type: 3}
-      propertyPath: rotationSpeed
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7734341968912495759, guid: 67617ea127fd9412abf9da43106ac6db, type: 3}
       propertyPath: m_Name
       value: Player
