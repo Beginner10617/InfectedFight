@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 public class zombieControl : MonoBehaviour
 {
+    bool facingplayer;
     Camera MainCamera;
     Animator animator;
     AudioSource playerAudio;
@@ -44,6 +45,7 @@ public class zombieControl : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         DeathAudioPlayed = false;
         isAttacked = false;
+        facingplayer = false;
         playerAudio = GameObject.FindWithTag("MainCamera").transform.GetChild(0).gameObject.GetComponent<AudioSource>();
     }
 
@@ -57,6 +59,8 @@ public class zombieControl : MonoBehaviour
         }
         if(col.gameObject.CompareTag("Player")){
             isAttacking = true;
+             transform.right = -player.transform.right;
+           
             animator.SetFloat("isWalking", 2f);
         }
     }
