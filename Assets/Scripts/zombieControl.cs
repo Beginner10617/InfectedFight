@@ -6,6 +6,8 @@ public class zombieControl : MonoBehaviour
 {
     Camera MainCamera;
     Animator animator;
+    AudioSource playerAudio;
+    public bool isAttacked;
     bool isRotating;
     bool isAttacking;
     public float movementSpeed;
@@ -41,6 +43,8 @@ public class zombieControl : MonoBehaviour
         MainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         audioSource = GetComponent<AudioSource>();
         DeathAudioPlayed = false;
+        isAttacked = false;
+        playerAudio = GameObject.FindWithTag("MainCamera").transform.GetChild(0).gameObject.GetComponent<AudioSource>();
     }
 
     void OnTriggerEnter2D(Collider2D col){
@@ -82,7 +86,7 @@ public class zombieControl : MonoBehaviour
 
     void Update()
     {   
-        if(player.GetComponent<PlayerHealth>().animating && healthBar.activeSelf == false && player.GetComponent<PlayerHealth>().canAttack){
+        if(player.GetComponent<PlayerHealth>().animating && healthBar.activeSelf == false && player.GetComponent<PlayerHealth>().canAttack && isAttacked){
             healthBar.SetActive(true);
         }
         else if (player.GetComponent<PlayerHealth>().animating==false && healthBar.activeSelf){
@@ -93,6 +97,10 @@ public class zombieControl : MonoBehaviour
         }
         if(isAttacking){
             player.GetComponent<PlayerHealth>().hitpoint -= damage * Time.deltaTime;
+            if(playerAudio.isPlaying == false){
+                playerAudio.PlayOneShot(audioManager.PlayerHurt);
+            }
+            
         }
         if(hitpoint <= 0){
             movementSpeed = 0f;

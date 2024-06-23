@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
     public GameObject UpperBody;
     AudioManager audioManager;
     GameObject Zombie;
+    public GameObject healthBar;
     public Transform handgunTransform;
     public float hitpoint;
     public Animator animator;
@@ -60,6 +62,7 @@ public class PlayerHealth : MonoBehaviour
         animating = false;
         UpperBody.transform.localPosition = new Vector3(0,0,0);
         animator.SetFloat("isWalking", 0f);
+        Zombie.GetComponent<zombieControl>().isAttacked = false;
     }
     
     void Shoot(){
@@ -73,6 +76,7 @@ public class PlayerHealth : MonoBehaviour
     void stopShoot(){
         animating = false;
         animator.SetFloat("isWalking", 0f);
+        Zombie.GetComponent<zombieControl>().isAttacked = false;
     }
     void FixedUpdate()
     {
@@ -93,7 +97,9 @@ public class PlayerHealth : MonoBehaviour
             {
                 canAttack = false;
             }
-        }   
+        }  
+        //updating healthBar
+        healthBar.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(5 * hitpoint, 25) ;
     }
 
     void Update()
@@ -101,6 +107,7 @@ public class PlayerHealth : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && animating == false && audioManager.Weapon.isPlaying == false){
             if(canAttack){
                 Zombie.GetComponent<zombieControl>().hitpoint -= damage;
+                Zombie.GetComponent<zombieControl>().isAttacked = true;
             }
             if(handGunAcquired){
                 Shoot();
