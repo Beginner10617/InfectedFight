@@ -47,25 +47,24 @@ public class zombieControl : MonoBehaviour
         isAttacked = false;
         facingplayer = false;
         playerAudio = GameObject.FindWithTag("MainCamera").transform.GetChild(0).gameObject.GetComponent<AudioSource>();
+        if(rnd.Next(0,100)<50){
+                rotationSpeed *= -1;
+            }
     }
 
     void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.CompareTag("Wall")||col.gameObject.CompareTag("Zombie")){
             isRotating = true;
-            if(rnd.Next(0,100)<75){
-                rotationSpeed *= -1;
-            }
             animator.SetFloat("isWalking", 0f);
         }
         if(col.gameObject.CompareTag("Player")){
             isAttacking = true;
-             transform.right = -player.transform.right;
            
             animator.SetFloat("isWalking", 2f);
         }
     }
     void OnTriggerStay2D(Collider2D col){
-        if(col.gameObject.CompareTag("Wall")||col.gameObject.CompareTag("Zombie")){
+        if(col.gameObject.CompareTag("Wall")||col.gameObject.CompareTag("Zombie") && isRotating){
             transform.Rotate(0, 0, rotationSpeed);
         }
         
@@ -100,6 +99,7 @@ public class zombieControl : MonoBehaviour
             MoveForward();
         }
         if(isAttacking){
+            Debug.Log("Zombie Attacking");
             player.GetComponent<PlayerHealth>().hitpoint -= damage * Time.deltaTime;
             if(playerAudio.isPlaying == false){
                 playerAudio.PlayOneShot(audioManager.PlayerHurt);
