@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PlayerHealth : MonoBehaviour
     public float handGunDamage;
     public float damage;
     public int ammos;
+    public TMP_Text bullets;
     
     void Start()
     {        
@@ -110,6 +112,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
+        bullets.text = ammos.ToString();
         if(Input.GetKeyDown(KeyCode.Space) && animating == false && audioManager.Weapon.isPlaying == false){
             if(canAttack && Zombie != null){
                 Zombie.GetComponent<zombieControl>().hitpoint -= damage;
