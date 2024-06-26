@@ -14,11 +14,11 @@ public class PlayerHealth : MonoBehaviour
     public Animator animator;
     public bool canAttack;
     public bool handGunAcquired;
-    public int Ammos;
     public bool animating;
     public float knifeDamage;// knifeDamage per second
     public float handGunDamage;
     public float damage;
+    public int ammos;
     
     void Start()
     {        
@@ -31,6 +31,7 @@ public class PlayerHealth : MonoBehaviour
         damage = knifeDamage;
         canAttack = false;
         audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
+        ammos = 0;
     }
 
     void OnTriggerEnter2D(Collider2D col){
@@ -62,7 +63,9 @@ public class PlayerHealth : MonoBehaviour
         animating = false;
         UpperBody.transform.localPosition = new Vector3(0,0,0);
         animator.SetFloat("isWalking", 0f);
-        Zombie.GetComponent<zombieControl>().isAttacked = false;
+        if(Zombie != null){
+            Zombie.GetComponent<zombieControl>().isAttacked = false;
+        }
     }
     
     void Shoot(){
@@ -70,13 +73,16 @@ public class PlayerHealth : MonoBehaviour
         if(audioManager.Weapon.isPlaying == false){
             audioManager.WeaponPlayAudio(audioManager.gunFire);        
         }
-        Ammos -=1;
+        UpperBody.transform.localPosition = new Vector3(0f, -0.0f, 0f);
+        ammos -=1;
         animator.SetFloat("isWalking", 2f);
     }
     void stopShoot(){
         animating = false;
         animator.SetFloat("isWalking", 0f);
-        Zombie.GetComponent<zombieControl>().isAttacked = false;
+        if(Zombie != null){
+            Zombie.GetComponent<zombieControl>().isAttacked = false;
+        }
     }
     void FixedUpdate()
     {
@@ -88,7 +94,7 @@ public class PlayerHealth : MonoBehaviour
             //drawing Aim
             handgunTransform.GetChild(0).localScale = new Vector3(hitZombie.distance/0.8f, 1f, 1f);
             handgunTransform.GetChild(0).localPosition = new Vector3(hitZombie.distance/1.6f, 0, 0f);
-            if(hitZombie.collider.gameObject.CompareTag("Zombie") && canAttack == false)
+            if(hitZombie.collider.gameObject.CompareTag("Zombie") && canAttack == false && ammos > 0)
             {
                 canAttack = true;
                 Zombie = hitZombie.collider.gameObject;
@@ -105,15 +111,15 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space) && animating == false && audioManager.Weapon.isPlaying == false){
-            if(canAttack){
+            if(canAttack && Zombie != null){
                 Zombie.GetComponent<zombieControl>().hitpoint -= damage;
                 Zombie.GetComponent<zombieControl>().isAttacked = true;
             }
-            if(handGunAcquired){
+            if(handGunAcquired && ammos > 0){
                 Shoot();
                 Invoke("stopShoot", 0.184f);
             }
-            else{
+            else if(handGunAcquired == false){
                 KnifeAttack();
                 Invoke("stopAttack", 1);
             }
