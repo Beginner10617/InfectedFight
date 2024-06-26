@@ -22,11 +22,15 @@ public class collectible : MonoBehaviour
                 col.gameObject.GetComponent<PlayerHealth>().handGunAcquired = true;
                 col.gameObject.GetComponent<PlayerHealth>().UpperBody = col.gameObject.GetComponent<playerMovement>().UpperBody2;
                 col.gameObject.GetComponent<PlayerHealth>().animator = col.gameObject.GetComponent<PlayerHealth>().UpperBody.GetComponent<Animator>();
-                Destroy(col.gameObject.GetComponent<BoxCollider2D>());
+              //  Destroy(col.gameObject.GetComponent<BoxCollider2D>());
             }
             if(gameObject.tag == "Bullets")
             {
                 col.gameObject.GetComponent<PlayerHealth>().ammos += 25;
+            }
+            if(gameObject.tag == "HealthBoost")
+            {
+                col.gameObject.GetComponent<PlayerHealth>().hitpoint += 25;
             }
         }
     }

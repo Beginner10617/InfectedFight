@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd79f817dd424495889cae98f617e590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpperBody2: {fileID: 0}
+  UpperBody2: {fileID: 8682300899346790738}
   enableArrow: 1
   movementSpeed: 0.75
   fastwalkSpeed: 1.5
@@ -352,12 +352,13 @@ MonoBehaviour:
   hitpoint: 100
   animator: {fileID: 7148392796586161757}
   canAttack: 0
-  handGunAcquired: 0
-  Ammos: 0
+  handGunAcquired: 1
   animating: 0
   knifeDamage: 20
   handGunDamage: 50
   damage: 0
+  ammos: 0
+  bullets: {fileID: 0}
 --- !u!58 &896373144684202696
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -464,7 +465,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &7961836640001815575
 GameObject:
   m_ObjectHideFlags: 0

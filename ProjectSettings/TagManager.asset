@@ -12,6 +12,7 @@ TagManager:
   - UpperBody2
   - AudioManager
   - Bullets
+  - HealthBoost
   layers:
   - Default
   - TransparentFX
