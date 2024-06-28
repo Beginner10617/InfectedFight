@@ -5,7 +5,7 @@ using UnityEngine;
 public class playerMovement : MonoBehaviour
 {
     AudioManager audioManager;
-    GameObject UpperBody;
+    public GameObject UpperBody;
     public GameObject UpperBody2;
     GameObject LowerBody;
     Animator animator;

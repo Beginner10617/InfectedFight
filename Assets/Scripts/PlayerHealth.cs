@@ -112,8 +112,28 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
+        if((Input.GetKey(KeyCode.LeftShift)||Input.GetKey(KeyCode.RightShift)) && Input.GetKeyDown(KeyCode.Space))
+        {
+            if(handGunAcquired){
+                UpperBody.SetActive(false);
+                UpperBody = GetComponent<playerMovement>().UpperBody;
+                UpperBody.SetActive(true);
+                animator = UpperBody.GetComponent<Animator>();
+            }
+            else
+            {
+
+                UpperBody.SetActive(false);
+                UpperBody = GetComponent<playerMovement>().UpperBody2;
+                UpperBody.SetActive(true);
+                animator = UpperBody.GetComponent<Animator>();
+            }
+            GetComponent<BoxCollider2D>().enabled = (handGunAcquired);
+            handGunAcquired = !handGunAcquired;
+        }
+
         bullets.text = ammos.ToString();
-        if(Input.GetKeyDown(KeyCode.Space) && animating == false && audioManager.Weapon.isPlaying == false){
+        if(Input.GetKeyDown(KeyCode.Space) && animating == false && audioManager.Weapon.isPlaying == false && !(Input.GetKey(KeyCode.LeftShift)||Input.GetKey(KeyCode.RightShift))){
             if(canAttack && Zombie != null){
                 Zombie.GetComponent<zombieControl>().hitpoint -= damage;
                 Zombie.GetComponent<zombieControl>().isAttacked = true;
