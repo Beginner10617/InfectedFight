@@ -327,6 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd79f817dd424495889cae98f617e590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UpperBody: {fileID: 0}
   UpperBody2: {fileID: 8682300899346790738}
   enableArrow: 1
   movementSpeed: 0.75
@@ -741,7 +742,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5445665222453141950
 Transform:
   m_ObjectHideFlags: 0
