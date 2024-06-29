@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour
     public float damage;
     public int ammos;
     public TMP_Text bullets;
-    
+    public int kills;
     void Start()
     {        
         handGunAcquired = false;
@@ -34,6 +34,7 @@ public class PlayerHealth : MonoBehaviour
         canAttack = false;
         audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
         ammos = 0;
+        kills = 0;
     }
 
     void OnTriggerEnter2D(Collider2D col){

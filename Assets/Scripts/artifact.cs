@@ -5,8 +5,11 @@ using UnityEngine;
 public class artifact : MonoBehaviour
 {
     public GameObject Artifact;
+    bool isPlayer;
     void Start()
     {
+        isPlayer = false;
+        Artifact.SetActive(false);
         foreach(Transform child in transform)
         {
             child.gameObject.SetActive(false);
@@ -16,6 +19,7 @@ public class artifact : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
+            isPlayer = true;
             foreach(Transform child in transform)
             {
                 child.gameObject.SetActive(true);
@@ -24,11 +28,16 @@ public class artifact : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Player"))
+        if(isPlayer)
         {
-            if(Input.GetKeyDown(KeyCode.Tab))
+//            Debug.Log("isPlayer")
+            if(Input.GetKey(KeyCode.Tab))
             {
-                Artifact.gameObject.SetActive(!Artifact.activeSelf);
+                Artifact.SetActive(true);
+            }
+            else
+            {
+                Artifact.SetActive(false);
             }
         }
     }
@@ -36,6 +45,7 @@ public class artifact : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
+            isPlayer = false;
             foreach(Transform child in transform)
             {
                 child.gameObject.SetActive(false);

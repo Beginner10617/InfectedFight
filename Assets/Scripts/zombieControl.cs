@@ -112,6 +112,7 @@ public class zombieControl : MonoBehaviour
             renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, renderer.color.a - Time.deltaTime);
             if(renderer.color.a <= 0){
                 Destroy(gameObject);
+                player.GetComponent<PlayerHealth>().kills += 1;
             }
             if(DeathAudioPlayed = false)
             {
