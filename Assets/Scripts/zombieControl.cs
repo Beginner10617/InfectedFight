@@ -50,6 +50,7 @@ public class zombieControl : MonoBehaviour
         if(rnd.Next(0,100)<50){
                 rotationSpeed *= -1;
             }
+        transform.Rotate(0, 0, 90f * rnd.Next(0, 4));
     }
 
     void OnTriggerEnter2D(Collider2D col){
