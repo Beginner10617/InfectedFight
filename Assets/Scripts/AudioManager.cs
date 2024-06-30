@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
     [Header("Audio Sources")]
     public AudioSource Background;
     public AudioSource Player;
+    public AudioSource Door;
     public AudioSource Weapon;
     [Header("Audio Clips")]
     public AudioClip walk1;
