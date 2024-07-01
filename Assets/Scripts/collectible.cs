@@ -27,6 +27,7 @@ public class collectible : MonoBehaviour
             if(gameObject.tag == "Bullets")
             {
                 col.gameObject.GetComponent<PlayerHealth>().ammos += 25;
+                Destroy(gameObject);
             }
             if(gameObject.tag == "HealthBoost")
             {

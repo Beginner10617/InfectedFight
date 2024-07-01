@@ -56,20 +56,24 @@ public class zombieControl : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.CompareTag("Wall")||col.gameObject.CompareTag("Zombie")){
             isRotating = true;
+            if(animator == null){Debug.Log("Animator NOT Working");}
             animator.SetFloat("isWalking", 0f);
         }
         if(col.gameObject.CompareTag("Player")){
-            isAttacking = true;
-           
-            animator.SetFloat("isWalking", 2f);
+            Vector2 A = new Vector2(transform.right.x,transform.right.y);
+            Vector2 B = new Vector2(player.transform.position.x, player.transform.position.y);
+            Vector2 C = new Vector2(transform.position.x, transform.position.y);
+            B = (B-C);
+            if(B.x * A.x + B.y * A.y > 0)
+            {
+                isAttacking = true;
+                animator.SetFloat("isWalking", 2f);
+            }
         }
     }
     void OnTriggerStay2D(Collider2D col){
-            transform.Rotate(0, 0, rotationSpeed);
         if(col.gameObject.CompareTag("Wall")||col.gameObject.CompareTag("Zombie") && isRotating){
-            if(rnd.Next(0,100)<50){
-                rotationSpeed *= -1;
-            }
+            transform.Rotate(0, 0, rotationSpeed);
         }
         
 
@@ -81,7 +85,7 @@ public class zombieControl : MonoBehaviour
         }
         if(col.gameObject.CompareTag("Player")){
             isAttacking = false;
-            animator.SetFloat("isWalking", 2f);
+            animator.SetFloat("isWalking", 1f);
         }
     }
 

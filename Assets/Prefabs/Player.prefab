@@ -157,7 +157,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: afe49e9fd3a39415481766fd3aa1f532, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -330,10 +330,10 @@ MonoBehaviour:
   UpperBody: {fileID: 0}
   UpperBody2: {fileID: 8682300899346790738}
   enableArrow: 1
-  movementSpeed: 0.75
-  fastwalkSpeed: 1.5
-  slowwalkSpeed: 0
-  strafeSpeed: 0.6
+  movementSpeed: 1.5
+  fastwalkSpeed: 3
+  slowwalkSpeed: 1.5
+  strafeSpeed: 1
   rotationSpeed: 1
 --- !u!114 &436158125271673811
 MonoBehaviour:
@@ -360,6 +360,7 @@ MonoBehaviour:
   damage: 0
   ammos: 0
   bullets: {fileID: 0}
+  kills: 0
 --- !u!58 &896373144684202696
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -540,7 +541,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: c21bf854902c44a008b65b836111def7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -648,7 +649,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: e9c902dc85d164c84aac1e354f32c095, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -713,7 +714,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.86963, y: -0.55310166}
+  m_Offset: {x: 0.80278754, y: -0.55310166}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -724,7 +725,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.53750014, y: 0.16083705}
+  m_Size: {x: 0.40381527, y: 0.16083705}
   m_EdgeRadius: 0
 --- !u!1 &8891601468420662770
 GameObject:
@@ -742,7 +743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5445665222453141950
 Transform:
   m_ObjectHideFlags: 0

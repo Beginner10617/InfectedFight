@@ -17,6 +17,16 @@ public class zombieGenerate : MonoBehaviour
         TransformsOfZombie = transform.GetChild(0);
         rnd = new System.Random();
         audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
+
+        foreach(Transform Row in TransformsOfZombie)
+        {
+            float y = Row.position.y;
+            foreach(Transform child in Row)
+            {
+                float x = child.position.x;
+                Instantiate(Zombie, new Vector3(x, y, 0f), Quaternion.identity, transform);
+            }
+        }
     }
 
     public void StopGenerating()
