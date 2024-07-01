@@ -65,8 +65,11 @@ public class zombieControl : MonoBehaviour
         }
     }
     void OnTriggerStay2D(Collider2D col){
-        if(col.gameObject.CompareTag("Wall")||col.gameObject.CompareTag("Zombie") && isRotating){
             transform.Rotate(0, 0, rotationSpeed);
+        if(col.gameObject.CompareTag("Wall")||col.gameObject.CompareTag("Zombie") && isRotating){
+            if(rnd.Next(0,100)<50){
+                rotationSpeed *= -1;
+            }
         }
         
 

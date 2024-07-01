@@ -106,14 +106,15 @@ public class PlayerHealth : MonoBehaviour
             {
                 canAttack = false;
             }
-        }  
+        } 
+        else if(damage != knifeDamage){damage=knifeDamage;} 
         //updating healthBar
         healthBar.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(5 * hitpoint, 25) ;
     }
 
     void Update()
     {
-        if((Input.GetKey(KeyCode.LeftShift)||Input.GetKey(KeyCode.RightShift)) && Input.GetKeyDown(KeyCode.Space))
+        if((Input.GetKey(KeyCode.LeftShift)||Input.GetKey(KeyCode.RightShift)) && Input.GetKeyDown(KeyCode.Tab))
         {
             if(handGunAcquired){
                 UpperBody.SetActive(false);
@@ -134,7 +135,7 @@ public class PlayerHealth : MonoBehaviour
         }
 
         bullets.text = ammos.ToString();
-        if(Input.GetKeyDown(KeyCode.Space) && animating == false && audioManager.Weapon.isPlaying == false && !(Input.GetKey(KeyCode.LeftShift)||Input.GetKey(KeyCode.RightShift))){
+        if(Input.GetKeyDown(KeyCode.Space) && animating == false && audioManager.Weapon.isPlaying == false){
             if(canAttack && Zombie != null){
                 Zombie.GetComponent<zombieControl>().hitpoint -= damage;
                 Zombie.GetComponent<zombieControl>().isAttacked = true;
