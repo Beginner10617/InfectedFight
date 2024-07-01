@@ -9,16 +9,20 @@ public class zombieGenerate : MonoBehaviour
     public int number_of_zombies;
     public GameObject Zombie;
     bool running = true;
+    public AudioClip announce;
+    AudioManager audioManager;
     // Start is called before the first frame update
     void Start()
     {
         TransformsOfZombie = transform.GetChild(0);
         rnd = new System.Random();
+        audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
-    void StopGenerating()
+    public void StopGenerating()
     {
         running = false;
+        if(!audioManager.Door.isPlaying) audioManager.Door.PlayOneShot(announce);
     }
 
     // Update is called once per frame
