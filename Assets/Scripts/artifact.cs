@@ -50,6 +50,7 @@ public class artifact : MonoBehaviour
             {
                 child.gameObject.SetActive(false);
             }
+            Artifact.SetActive(false);
         }
     }
 }
