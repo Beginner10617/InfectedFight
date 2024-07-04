@@ -13,6 +13,7 @@ TagManager:
   - AudioManager
   - Bullets
   - HealthBoost
+  - GameManager
   layers:
   - Default
   - TransparentFX

@@ -22,8 +22,10 @@ public class PlayerHealth : MonoBehaviour
     public int ammos;
     public TMP_Text bullets;
     public int kills;
+    public GameData gameData;
     void Start()
     {        
+        gameData = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().gameData;
         handGunAcquired = false;
         UpperBody = GameObject.FindWithTag("UpperBody");
         if (UpperBody == null) {
@@ -35,6 +37,14 @@ public class PlayerHealth : MonoBehaviour
         audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
         ammos = 0;
         kills = 0;
+        if(gameData.Loading)
+        {
+            ammos = gameData.playerAmmos;
+            kills = gameData.kills;
+            hitpoint = gameData.playerHitpoints;
+            transform.position = gameData.playerTransform.position;
+            handgunTransform.rotation = gameData.playerTransform.rotation;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D col){

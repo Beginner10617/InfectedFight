@@ -38,6 +38,7 @@ public class playerMovement : MonoBehaviour
         rigidBody= GetComponent<Rigidbody2D>();
         slowwalkSpeed = movementSpeed;
         audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
+
     }
 
     void MoveForward(){
