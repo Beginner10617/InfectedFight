@@ -97,6 +97,10 @@ public class zombieControl : MonoBehaviour
 
     void Update()
     {   
+        if(player.GetComponent<playerMovement>().paused)
+        {
+            transform.parent.gameObject.SetActive(false);
+        }
         if(player.GetComponent<PlayerHealth>().animating && healthBar.activeSelf == false && player.GetComponent<PlayerHealth>().canAttack && isAttacked){
             healthBar.SetActive(true);
         }

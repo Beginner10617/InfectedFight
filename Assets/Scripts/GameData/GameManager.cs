@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public GameData gameData;
     public UIManager uIManager;
     public Transform Zombies;
+    public Transform healthBoosts;
+    public Transform Ammos;
 
     GameObject player;
     void Start()
@@ -19,16 +21,29 @@ public class GameManager : MonoBehaviour
         gameData = new GameData();
         
             player = GameObject.FindWithTag("Player");
-            gameData.playerTransform = player.transform;
+            gameData.playerVector3 = player.transform.position;
             gameData.playerHitpoints = player.GetComponent<PlayerHealth>().hitpoint;
             gameData.playerAmmos = player.GetComponent<PlayerHealth>().ammos;
+            int m=0;
             foreach(Transform zombie in Zombies)
             {
-                gameData.zombieTransform.Add(zombie);
-                gameData.zombieHitPoint.Add(zombie.gameObject.GetComponent<zombieControl>().hitpoint);
+                if(m>0)
+                {
+                    //(gameData.zombieVector3==null);
+                    gameData.zombieVector3.Add(zombie.position);
+                    //(zombie==null);
+                    gameData.zombieHitPoint.Add(zombie.gameObject.GetComponent<zombieControl>().hitpoint);
+                }
+                m+=1;
             }
-    
-
+            foreach(Transform health in healthBoosts)
+            {
+                gameData.healthBoostVector3.Add(health.position);
+            }
+            foreach(Transform ammo in Ammos)
+            {
+                gameData.bulletsTransfrom.Add(ammo.position);
+            }
         SaveSystem.SaveGame(gameData);
     }
 
@@ -46,6 +61,8 @@ public class GameManager : MonoBehaviour
         else
         {
             gameData.Loading = true;
+            Debug.Log("Loading...");
+            uIManager.Play();
         }
     }
 

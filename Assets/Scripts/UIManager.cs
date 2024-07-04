@@ -9,11 +9,14 @@ public class UIManager : MonoBehaviour
     public CursorMode cursorMode = CursorMode.Auto;
     public List<GameObject> ToStart;
     public GameObject LoadingScreen;
+    public GameObject Pause;
     AudioManager audioManager;
     public AudioClip click_sound;
     cameraManager manager;
+    Vector3 startingPoint;
     void Start()
     {
+        startingPoint = new Vector3(1.5f, -79, -1);
         LoadingScreen.SetActive(false);
         Cursor.SetCursor(cursorSprite, hotspot, cursorMode);
         manager = GameObject.FindWithTag("MainCamera").GetComponent<cameraManager>();
@@ -40,12 +43,14 @@ public class UIManager : MonoBehaviour
         {
             child.gameObject.SetActive(false);
         }
-        LoadingScreen.SetActive(true);
+//        LoadingScreen.SetActive(true);
         Invoke("StartGame", 3f);
     }
 
-    public void Load()
-    {}
+    public void ResetPlayerPosition()
+    {
+        
+    }
 
     public void ShowControls()
     {}
@@ -63,5 +68,42 @@ public class UIManager : MonoBehaviour
         {
             audioManager.Door.PlayOneShot(click_sound);
         }
+
+    }
+
+    public void Resume()
+    {
+        GameObject.FindWithTag("Player").GetComponent<playerMovement>().paused = false;
+        Pause.SetActive(false);
+        StartGame();
+    }
+
+    public void Exit()
+    {
+        manager.enabled = false;
+        GameObject.FindWithTag("Player").GetComponent<playerMovement>().paused = false;
+        GameObject.FindWithTag("Player").SetActive(false);
+        int n=0;
+        foreach(GameObject gO in ToStart)
+        {
+            if(n==1)
+            {
+                int m=0;
+                foreach(Transform child in gO.transform)
+                {
+                    if(m>0) Destroy(child.gameObject);
+                    m+=1;
+                }
+            }
+            n+=1;
+            gO.SetActive(false);
+        }
+        Pause.SetActive(false);
+        foreach(Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+        LoadingScreen.SetActive(false);
+        
     }
 }

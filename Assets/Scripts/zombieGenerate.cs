@@ -13,7 +13,7 @@ public class zombieGenerate : MonoBehaviour
     AudioManager audioManager;
     public GameData gameData;
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         gameData = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().gameData;
         rnd = new System.Random();
@@ -21,11 +21,20 @@ public class zombieGenerate : MonoBehaviour
 
         if(gameData.Loading)
         {
-            for(int i=0; i<gameData.zombieTransform.Count; i++)
+                            int m=0;
+                foreach(Transform child in transform)
+                {
+                    if(m>0) Destroy(child.gameObject);
+                    m+=1;
+                }
+            for(int i=0; i<gameData.zombieVector3.Count; i++)
             {
-                GameObject zombie = Instantiate(Zombie, gameData.zombieTransform[i].position, gameData.zombieTransform[i].rotation, transform);
+
+                //(gameData.zombieVector3[i]);
+                GameObject zombie = Instantiate(Zombie, gameData.zombieVector3[i], Quaternion.identity, transform);
                 zombie.GetComponent<zombieControl>().hitpoint = gameData.zombieHitPoint[i];
             }
+            running = gameData.generatorRunning;
         }
         else
         {
@@ -52,6 +61,10 @@ public class zombieGenerate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(running && transform.childCount == 1)
+        {
+            Start();
+        }
         if(running && transform.childCount < number_of_zombies)
         {
             Transform Row = TransformsOfZombie.GetChild(rnd.Next(0, TransformsOfZombie.childCount));

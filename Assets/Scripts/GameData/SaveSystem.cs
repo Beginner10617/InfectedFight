@@ -16,11 +16,12 @@ public static class SaveSystem
         {
             string json = File.ReadAllText(path);
             GameData data = JsonUtility.FromJson<GameData>(json);
+            //(path);
             return data;
         }
         else
         {
-            Debug.LogWarning("Save file not found in " + path);
+            //Warning("Save file not found in " + path);
             return null;
         }
     }

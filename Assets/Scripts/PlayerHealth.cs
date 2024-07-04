@@ -29,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
         handGunAcquired = false;
         UpperBody = GameObject.FindWithTag("UpperBody");
         if (UpperBody == null) {
-            Debug.Log("UpperBody not found by camera");
+            //("UpperBody not found by camera");
         }
         animator = UpperBody.GetComponent<Animator>();
         damage = knifeDamage;
@@ -37,13 +37,15 @@ public class PlayerHealth : MonoBehaviour
         audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
         ammos = 0;
         kills = 0;
+        Debug.Log(gameData.Loading);
         if(gameData.Loading)
         {
+
             ammos = gameData.playerAmmos;
             kills = gameData.kills;
             hitpoint = gameData.playerHitpoints;
-            transform.position = gameData.playerTransform.position;
-            handgunTransform.rotation = gameData.playerTransform.rotation;
+            transform.position = gameData.playerVector3;
+            Debug.Log(gameData.playerVector3);
         }
     }
 
