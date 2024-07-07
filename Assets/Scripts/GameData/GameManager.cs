@@ -9,8 +9,7 @@ public class GameManager : MonoBehaviour
     public Transform Zombies;
     public Transform healthBoosts;
     public Transform Ammos;
-
-    GameObject player;
+    public GameObject player;
     void Start()
     {
         gameData = new GameData();
@@ -19,12 +18,12 @@ public class GameManager : MonoBehaviour
             Debug.Log("Null gameData");
         }
         gameData.Loading=false;
+        player.SetActive(true);
     }
     public void SaveGame()
     {
         gameData = new GameData();
         
-            player = GameObject.FindWithTag("Player");
             gameData.playerVector3 = player.transform.position;
             gameData.playerHitpoints = player.GetComponent<PlayerHealth>().hitpoint;
             gameData.playerAmmos = player.GetComponent<PlayerHealth>().ammos;

@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
     public int ammos;
     public TMP_Text bullets;
     public int kills;
-    public GameData gameData;
+    public GameData gameData = new GameData();
     void Start()
     {        
         gameData = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().gameData;
@@ -37,8 +37,7 @@ public class PlayerHealth : MonoBehaviour
         audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
         ammos = 0;
         kills = 0;
-        Debug.Log(gameData.Loading);
-        if(gameData.Loading)
+        if(gameData.Loading == true)
         {
 
             ammos = gameData.playerAmmos;

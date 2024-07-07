@@ -8,7 +8,7 @@ public class zombieGenerate : MonoBehaviour
     System.Random rnd;
     public int number_of_zombies;
     public GameObject Zombie;
-    bool running = false;
+    public bool running = false;
     public AudioClip announce;
     AudioManager audioManager;
     public GameData gameData;
@@ -61,10 +61,6 @@ public void Generate()
     // Update is called once per frame
     void Update()
     {
-        if(running && transform.childCount == 1)
-        {
-            Start();
-        }
         if(running && transform.childCount < number_of_zombies)
         {
             Transform Row = TransformsOfZombie.GetChild(rnd.Next(0, TransformsOfZombie.childCount));

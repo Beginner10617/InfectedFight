@@ -41,6 +41,7 @@ public class UIManager : MonoBehaviour
 
         if(!gameData.Loading) 
         {
+            Debug.Log("Generating");
             Zombies.GetComponent<zombieGenerate>().Generate();
         }
         LoadingScreen.SetActive(false);
@@ -51,13 +52,8 @@ public class UIManager : MonoBehaviour
         {
             child.gameObject.SetActive(false);
         }
-//        LoadingScreen.SetActive(true);
+        LoadingScreen.SetActive(true);
         Invoke("StartGame", 3f);
-    }
-
-    public void ResetPlayerPosition()
-    {
-        
     }
 
     public void ShowControls()
@@ -90,21 +86,26 @@ public class UIManager : MonoBehaviour
     public void Exit()
     {
         //Restarting player
+        GameObject.FindWithTag("Player").GetComponent<playerMovement>().paused = false;
         GameObject.FindWithTag("Player").transform.position = startingPoint;
-        GameObject.FindWithTag("Player").SetActive(false);
+        manager.enabled = false;
 
         //Restarting Zombies
-        while(true)
+        Zombies.SetActive(true);
+        Zombies.GetComponent<zombieGenerate>().running = false;
+        int m=0;
+        foreach(Transform child in Zombies.transform)
         {
-            GameObject x = GameObject.FindWithTag("Zombie");
-            if(x==null)
-            {
-                break;
-            }
-            else
-            {
-                Destroy(x);
-            }
+            if(m>0) Destroy(child.gameObject);
+            m+=1;
         }
+        Debug.Log(m);
+        //Changing UI
+        Pause.SetActive(false);
+        foreach(Transform element in transform)
+        {
+            element.gameObject.SetActive(true);
+        }
+        LoadingScreen.SetActive(false);
     }
 }
