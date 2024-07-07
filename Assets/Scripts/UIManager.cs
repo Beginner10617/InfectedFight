@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     public AudioClip click_sound;
     cameraManager manager;
     Vector3 startingPoint;
+    GameData gameData;
+    public GameObject Zombies;
     void Start()
     {
         startingPoint = new Vector3(1.5f, -79, -1);
@@ -35,6 +37,12 @@ public class UIManager : MonoBehaviour
             gO.SetActive(true);
         }
         manager.enabled = true;
+        gameData = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().gameData;
+
+        if(!gameData.Loading) 
+        {
+            Zombies.GetComponent<zombieGenerate>().Generate();
+        }
         LoadingScreen.SetActive(false);
     }
     public void Play()
@@ -75,35 +83,28 @@ public class UIManager : MonoBehaviour
     {
         GameObject.FindWithTag("Player").GetComponent<playerMovement>().paused = false;
         Pause.SetActive(false);
-        StartGame();
+        Zombies.SetActive(true);
+     //   StartGame();
     }
 
     public void Exit()
     {
-        manager.enabled = false;
-        GameObject.FindWithTag("Player").GetComponent<playerMovement>().paused = false;
+        //Restarting player
+        GameObject.FindWithTag("Player").transform.position = startingPoint;
         GameObject.FindWithTag("Player").SetActive(false);
-        int n=0;
-        foreach(GameObject gO in ToStart)
+
+        //Restarting Zombies
+        while(true)
         {
-            if(n==1)
+            GameObject x = GameObject.FindWithTag("Zombie");
+            if(x==null)
             {
-                int m=0;
-                foreach(Transform child in gO.transform)
-                {
-                    if(m>0) Destroy(child.gameObject);
-                    m+=1;
-                }
+                break;
             }
-            n+=1;
-            gO.SetActive(false);
+            else
+            {
+                Destroy(x);
+            }
         }
-        Pause.SetActive(false);
-        foreach(Transform child in transform)
-        {
-            child.gameObject.SetActive(true);
-        }
-        LoadingScreen.SetActive(false);
-        
     }
 }

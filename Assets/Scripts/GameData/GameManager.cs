@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameData = new GameData();
+        if(gameData==null)
+        {
+            Debug.Log("Null gameData");
+        }
         gameData.Loading=false;
     }
     public void SaveGame()

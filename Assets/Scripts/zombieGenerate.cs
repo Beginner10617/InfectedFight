@@ -8,7 +8,7 @@ public class zombieGenerate : MonoBehaviour
     System.Random rnd;
     public int number_of_zombies;
     public GameObject Zombie;
-    bool running = true;
+    bool running = false;
     public AudioClip announce;
     AudioManager audioManager;
     public GameData gameData;
@@ -18,15 +18,16 @@ public class zombieGenerate : MonoBehaviour
         gameData = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().gameData;
         rnd = new System.Random();
         audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
-
+        TransformsOfZombie = transform.GetChild(0);
+        Debug.Log(TransformsOfZombie.GetChild(0));
         if(gameData.Loading)
         {
-                            int m=0;
-                foreach(Transform child in transform)
-                {
-                    if(m>0) Destroy(child.gameObject);
-                    m+=1;
-                }
+            int m=0;
+            foreach(Transform child in transform)
+            {
+                if(m>0) Destroy(child.gameObject);
+                m+=1;
+            }
             for(int i=0; i<gameData.zombieVector3.Count; i++)
             {
 
@@ -36,22 +37,21 @@ public class zombieGenerate : MonoBehaviour
             }
             running = gameData.generatorRunning;
         }
-        else
+    }
+public void Generate()
+{            
+    //Debug.Log(TransformsOfZombie);
+    foreach(Transform Row in TransformsOfZombie)
+    {
+        float y = Row.position.y;
+        foreach(Transform child in Row)
         {
-            TransformsOfZombie = transform.GetChild(0);
-            
-            foreach(Transform Row in TransformsOfZombie)
-            {
-                float y = Row.position.y;
-                foreach(Transform child in Row)
-                {
-                    float x = child.position.x;
-                    Instantiate(Zombie, new Vector3(x, y, 0f), Quaternion.identity, transform);
-                }
-            }
+            float x = child.position.x;
+            Instantiate(Zombie, new Vector3(x, y, 0f), Quaternion.identity, transform);
         }
     }
-
+    running = true;
+}
     public void StopGenerating()
     {
         running = false;
