@@ -22,22 +22,28 @@ public class zombieGenerate : MonoBehaviour
         Debug.Log(TransformsOfZombie.GetChild(0));
         if(gameData.Loading)
         {
-            int m=0;
-            foreach(Transform child in transform)
-            {
-                if(m>0) Destroy(child.gameObject);
-                m+=1;
-            }
-            for(int i=0; i<gameData.zombieVector3.Count; i++)
-            {
-
-                //(gameData.zombieVector3[i]);
-                GameObject zombie = Instantiate(Zombie, gameData.zombieVector3[i], Quaternion.identity, transform);
-                zombie.GetComponent<zombieControl>().hitpoint = gameData.zombieHitPoint[i];
-            }
-            running = gameData.generatorRunning;
+            LoadZombies();
         }
     }
+public void LoadZombies()
+{
+    gameData = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().gameData;
+    int m=0;
+    foreach(Transform child in transform)
+    {
+        if(m>0) Destroy(child.gameObject);
+        m+=1;
+    }
+    Debug.Log(gameData.zombieVector3.Count);
+    for(int i=0; i<gameData.zombieVector3.Count; i++)
+    {
+        //(gameData.zombieVector3[i]);
+        GameObject zombie = Instantiate(Zombie, gameData.zombieVector3[i], Quaternion.identity, transform);
+        zombie.GetComponent<zombieControl>().hitpoint = gameData.zombieHitPoint[i];
+    }
+    running = gameData.generatorRunning;
+
+}
 public void Generate()
 {            
     //Debug.Log(TransformsOfZombie);

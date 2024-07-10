@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     Vector3 startingPoint;
     GameData gameData;
     public GameObject Zombies;
+    public GameObject GamePlay;
     void Start()
     {
         startingPoint = new Vector3(1.5f, -79, -1);
@@ -43,6 +44,15 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log("Generating");
             Zombies.GetComponent<zombieGenerate>().Generate();
+            GameObject.FindWithTag("Player").transform.position = startingPoint;  
+        }
+        else
+        {  
+            Zombies.gameObject.GetComponent<zombieGenerate>().LoadZombies();
+            GameObject.FindWithTag("Player").transform.position = gameData.playerVector3;
+            GameObject.FindWithTag("Player").GetComponent<PlayerHealth>().hitpoint = gameData.playerHitpoints;
+            GameObject.FindWithTag("Player").GetComponent<PlayerHealth>().ammos = gameData.playerAmmos;
+            GameObject.FindWithTag("Player").GetComponent<PlayerHealth>().kills = gameData.kills; 
         }
         LoadingScreen.SetActive(false);
     }
@@ -52,6 +62,7 @@ public class UIManager : MonoBehaviour
         {
             child.gameObject.SetActive(false);
         }
+        GameObject.FindWithTag("Player").GetComponent<playerMovement>().paused = false;
         LoadingScreen.SetActive(true);
         Invoke("StartGame", 3f);
     }
@@ -86,8 +97,6 @@ public class UIManager : MonoBehaviour
     public void Exit()
     {
         //Restarting player
-        GameObject.FindWithTag("Player").GetComponent<playerMovement>().paused = false;
-        GameObject.FindWithTag("Player").transform.position = startingPoint;
         manager.enabled = false;
 
         //Restarting Zombies
@@ -100,6 +109,7 @@ public class UIManager : MonoBehaviour
             m+=1;
         }
         Debug.Log(m);
+
         //Changing UI
         Pause.SetActive(false);
         foreach(Transform element in transform)
@@ -107,5 +117,6 @@ public class UIManager : MonoBehaviour
             element.gameObject.SetActive(true);
         }
         LoadingScreen.SetActive(false);
+        GamePlay.SetActive(false);
     }
 }

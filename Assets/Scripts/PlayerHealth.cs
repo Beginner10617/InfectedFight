@@ -37,6 +37,7 @@ public class PlayerHealth : MonoBehaviour
         audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
         ammos = 0;
         kills = 0;
+        hitpoint = 100;
         if(gameData.Loading == true)
         {
 

@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
         {
             gameData = new GameData();
             gameData.Loading = false;
+            Debug.Log("Not loaded");
             uIManager.Play();
         }
         else
