@@ -32,6 +32,7 @@ public class collectible : MonoBehaviour
             if(gameObject.tag == "HealthBoost")
             {
                 col.gameObject.GetComponent<PlayerHealth>().hitpoint += 25;
+                Destroy(gameObject);
             }
         }
     }

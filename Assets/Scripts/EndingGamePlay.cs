@@ -23,6 +23,10 @@ public class EndingGamePlay : MonoBehaviour
     }
     void Update()
     {
+        if(player.GetComponent<PlayerHealth>().hitpoint <= 0)
+        {
+            gameOver = true;
+        }
         if(gameOver)
         {
             player.transform.position = transform.position;
