@@ -19,7 +19,6 @@ public class zombieGenerate : MonoBehaviour
         rnd = new System.Random();
         audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
         TransformsOfZombie = transform.GetChild(0);
-        Debug.Log(TransformsOfZombie.GetChild(0));
         if(gameData.Loading)
         {
             LoadZombies();

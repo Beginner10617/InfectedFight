@@ -5,9 +5,9 @@ public static class SaveSystem
     private static string path = Application.persistentDataPath + "/savefile.json";
 
     public static void SaveGame(GameData data)
-    {
-        string json = JsonUtility.ToJson(data);
-        File.WriteAllText(path, json);
+    {    
+            string json = JsonUtility.ToJson(data);
+            File.WriteAllText(path, json);
     }
 
     public static GameData LoadGame()

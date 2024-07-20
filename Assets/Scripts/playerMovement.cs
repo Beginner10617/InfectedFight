@@ -12,10 +12,7 @@ public class playerMovement : MonoBehaviour
     Animator feetAnim;
     Rigidbody2D rigidBody;
     public bool enableArrow = true;
-    public float movementSpeed = 0.75f;
-    public float fastwalkSpeed = 1.5f;
-    public float slowwalkSpeed;
-    public float strafeSpeed = 0.6f;
+    public float movementSpeed = 1.5f;
     public float rotationSpeed = 90f;
     public GameObject Pause;
     public bool paused;
@@ -39,19 +36,14 @@ public class playerMovement : MonoBehaviour
         }
         feetAnim = LowerBody.GetComponent<Animator>();
         rigidBody= GetComponent<Rigidbody2D>();
-        slowwalkSpeed = movementSpeed;
         audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
 
     }
 
     void MoveForward(){
         rigidBody.position += new Vector2(transform.right.x, transform.right.y) * movementSpeed * Time.deltaTime;        
-        if(movementSpeed == slowwalkSpeed){
-            feetAnim.SetFloat("isWalking", 1f);
-        }
-        else if(movementSpeed == fastwalkSpeed){
+        
             feetAnim.SetFloat("isWalking", 4f);
-        }
         if(audioManager.Player.isPlaying == false)
         {
         audioManager.PlayerPlayAudio(audioManager.walk1);
@@ -59,37 +51,10 @@ public class playerMovement : MonoBehaviour
     }
     void MoveBackward(){
         rigidBody.position -= new Vector2(transform.right.x, transform.right.y) * movementSpeed * Time.deltaTime;
-        if(movementSpeed == slowwalkSpeed){
-            feetAnim.SetFloat("isWalking", 1f);
-        }
-        else if(movementSpeed == fastwalkSpeed){
             feetAnim.SetFloat("isWalking", 4f);
-        }
         if(audioManager.Player.isPlaying == false)
         {
         audioManager.PlayerPlayAudio(audioManager.walk1);
-        }
-    }
-    void RotateRight(){
-        transform.Rotate(0, 0, -rotationSpeed);
-    }
-    void RotateLeft(){
-        transform.Rotate(0, 0, rotationSpeed);
-    }
-    void StrafeRight(){
-        rigidBody.position -= new Vector2(transform.up.x, transform.up.y) * strafeSpeed * Time.deltaTime;
-        feetAnim.SetFloat("isWalking", 2f);     
-        if(audioManager.Player.isPlaying == false)
-        {
-            audioManager.PlayerPlayAudio(audioManager.walk1);
-        }
-        }
-    void StrafeLeft(){
-        rigidBody.position += new Vector2(transform.up.x, transform.up.y) * strafeSpeed * Time.deltaTime;
-        feetAnim.SetFloat("isWalking", 3f);
-        if(audioManager.Player.isPlaying == false)
-        {
-            audioManager.PlayerPlayAudio(audioManager.walk1);
         }
     }
     // Update is called once per frame
@@ -107,102 +72,33 @@ public class playerMovement : MonoBehaviour
                 UpperBody2.SetActive(true);
                 animator = UpperBody2.GetComponent<Animator>();
             }
-            if(Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                movementSpeed = fastwalkSpeed;
-            }
-            else if(Input.GetKeyUp(KeyCode.LeftShift)){
-                movementSpeed = slowwalkSpeed;
-            }
-            if(Input.GetKeyDown(KeyCode.RightShift))
-            {
-                movementSpeed = fastwalkSpeed;
-            }
-            else if(Input.GetKeyUp(KeyCode.RightShift)){
-                movementSpeed = slowwalkSpeed;
-            }
             //animations
-            if(enableArrow){
-                if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)){
-                    animator.SetFloat("isWalking", 1f);
-                }
-                else if(Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow)){
-                    animator.SetFloat("isWalking", 0f);
-                    feetAnim.SetFloat("isWalking", 0f);
-                }
-                if(Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    animator.SetFloat("isWalking", 0f);
-                }
-                else if(Input.GetKeyDown(KeyCode.RightArrow))
-                {
-                    animator.SetFloat("isWalking", 0f);
-                    }
-                else if(Input.GetKeyUp(KeyCode.LeftArrow)||Input.GetKeyUp(KeyCode.RightArrow)){
-                    animator.SetFloat("isWalking", 0f);
-                    feetAnim.SetFloat("isWalking", 0f);
-                }
-            }
-            else{
-                if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)){
-                    animator.SetFloat("isWalking", 1f);
-                }
-                else if(Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S)){
-                    animator.SetFloat("isWalking", 0f);
-                    feetAnim.SetFloat("isWalking", 0f);
-                }
-                if(Input.GetKeyDown(KeyCode.A))
-                {
-                    animator.SetFloat("isWalking", 0f);
-                    feetAnim.SetFloat("isWalking", 3f);
-                }
-                else if(Input.GetKeyDown(KeyCode.D))
-                {
-                    animator.SetFloat("isWalking", 0f);
-                    feetAnim.SetFloat("isWalking", 2f);
-                }
-                else if(Input.GetKeyUp(KeyCode.A)||Input.GetKeyUp(KeyCode.D)){
-                    animator.SetFloat("isWalking", 0f);
-                    feetAnim.SetFloat("isWalking", 0f);
-                }
-            }
 
-            //movements
-            if(enableArrow){
-                if(Input.GetKey(KeyCode.UpArrow)){
-                    MoveForward();
+                if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)||Input.GetKeyDown(KeyCode.A)||Input.GetKeyDown(KeyCode.D)){
+                    animator.SetFloat("isWalking", 1f);
                 }
-                if(Input.GetKey(KeyCode.DownArrow)){
-                    MoveBackward();
+                else if(Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S)||Input.GetKeyUp(KeyCode.A)||Input.GetKeyUp(KeyCode.D)){
+                    animator.SetFloat("isWalking", 0f);
+                    feetAnim.SetFloat("isWalking", 0f);
                 }
-                if(Input.GetKey(KeyCode.RightArrow)){
-                    StrafeRight();
-                }
-                
-                if(Input.GetKey(KeyCode.LeftArrow)){
-                    StrafeLeft();
-                }
-            }
-            else{
+
                 if(Input.GetKey(KeyCode.W)){
+                    transform.eulerAngles = new Vector3(0, 0, 90);
                     MoveForward();
                 }
                 if(Input.GetKey(KeyCode.S)){
-                    MoveBackward();
+                    transform.eulerAngles = new Vector3(0, 0, 270);
+                    MoveForward();
                 }
                 if(Input.GetKey(KeyCode.D)){
-                    StrafeRight();
+                    transform.eulerAngles = new Vector3(0, 0, 0);
+                    MoveForward();
                 }
                 if(Input.GetKey(KeyCode.A)){
-                    StrafeLeft();
+                    transform.eulerAngles = new Vector3(0, 0, 180);
+                    MoveForward();
                 }
-            }
-            if(Input.GetKey(KeyCode.Q)){
-                RotateLeft();
-            }
-            if(Input.GetKey(KeyCode.E)){
-                RotateRight();
-            }
+            
         }
     }
 }

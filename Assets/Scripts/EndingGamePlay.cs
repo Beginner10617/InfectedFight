@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class EndingGamePlay : MonoBehaviour
 {
@@ -8,16 +9,18 @@ public class EndingGamePlay : MonoBehaviour
     bool gameOver;
     public float speed;
     GameObject player;
+    string path ;
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
         gameOver = false;   
+        path = Application.persistentDataPath + "/savefile.json";
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            player = other.gameObject;
             gameOver = true;
         }
     }
@@ -29,6 +32,10 @@ public class EndingGamePlay : MonoBehaviour
         }
         if(gameOver)
         {
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
             player.transform.position = transform.position;
             player.transform.localScale -= new Vector3(1, 1, 1) * speed * Time.deltaTime;
             if(player.transform.localScale.x <= 0)

@@ -1081,8 +1081,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.00085002184, y: -0.0038999915, z: 0}
-    m_Extent: {x: 1.0079501, y: 1.0054, z: 0}
+    m_Center: {x: -0.003099978, y: -0.0043500066, z: 0}
+    m_Extent: {x: 1.0034001, y: 0.99995, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -2956,8 +2956,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.00095003843, y: -0.00029999018, z: 0}
-    m_Extent: {x: 1.00425, y: 1.0084, z: 0}
+    m_Center: {x: -0.00029999018, y: -0.0011000037, z: 0}
+    m_Extent: {x: 1.0095, y: 1.0035, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -16426,8 +16426,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0029500127, y: -0.005100012, z: 0}
-    m_Extent: {x: 0.99735004, y: 1.0001, z: 0}
+    m_Center: {x: 0.0024999976, y: 0.003450036, z: 0}
+    m_Extent: {x: 1.0030999, y: 1.00615, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -39367,8 +39367,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0013500452, y: 0.0022500157, z: 0}
-    m_Extent: {x: 1.00605, y: 1.00455, z: 0}
+    m_Center: {x: -0.006549984, y: 0.0022000074, z: 0}
+    m_Extent: {x: 1.00105, y: 1.0036, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -45645,6 +45645,10 @@ PrefabInstance:
     - target: {fileID: 5722145485462452398, guid: 67617ea127fd9412abf9da43106ac6db, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5722145485462452398, guid: 67617ea127fd9412abf9da43106ac6db, type: 3}
+      propertyPath: movementSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7734341968912495759, guid: 67617ea127fd9412abf9da43106ac6db, type: 3}
       propertyPath: m_Name
