@@ -212,7 +212,7 @@ MonoBehaviour:
   isAttacked: 0
   movementSpeed: 1.25
   hitpoint: 100
-  damage: 2
+  damage: 10
 --- !u!50 &807387738262396364
 Rigidbody2D:
   serializedVersion: 4
@@ -432,7 +432,7 @@ MonoBehaviour:
   - {x: 1.2050002, y: -1.1100006, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 96964
+  m_InstanceId: 32854
   m_LocalBounds:
     m_Center: {x: 0.00000011920929, y: 0, z: 0}
     m_Extent: {x: 1.205, y: 1.1100006, z: 0}

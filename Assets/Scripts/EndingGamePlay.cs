@@ -8,11 +8,12 @@ public class EndingGamePlay : MonoBehaviour
     // Start is called before the first frame update
     bool gameOver;
     public float speed;
-    GameObject player;
+    public GameObject GameOver;
+    public GameObject player;
     string path ;
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        GameOver.SetActive(false);
         gameOver = false;   
         path = Application.persistentDataPath + "/savefile.json";
     }
@@ -26,23 +27,30 @@ public class EndingGamePlay : MonoBehaviour
     }
     void Update()
     {
-        if(player.GetComponent<PlayerHealth>().hitpoint <= 0)
+        if(player.activeSelf)
         {
-            gameOver = true;
-        }
-        if(gameOver)
-        {
-            if (File.Exists(path))
+            if(player.GetComponent<PlayerHealth>().hitpoint <= 0)
             {
-                File.Delete(path);
+                gameOver = true;
             }
-            player.transform.position = transform.position;
-            player.transform.localScale -= new Vector3(1, 1, 1) * speed * Time.deltaTime;
-            if(player.transform.localScale.x <= 0)
+            if(gameOver)
             {
-                gameOver = false;
-                Debug.Log("Game Over");
-                //
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+                player.transform.position = transform.position;
+                player.transform.localScale -= new Vector3(1, 1, 1) * speed * Time.deltaTime;
+                if(player.transform.localScale.x <= 0)
+                {
+                    gameOver = false;
+                    Debug.Log("Game Over");
+                    //
+                    if(player.GetComponent<PlayerHealth>().hitpoint <= 0)
+                    {
+                        GameOver.SetActive(true);
+                    }
+                }
             }
         }
     }

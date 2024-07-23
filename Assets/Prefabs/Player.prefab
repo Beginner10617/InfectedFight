@@ -331,9 +331,6 @@ MonoBehaviour:
   UpperBody2: {fileID: 8682300899346790738}
   enableArrow: 1
   movementSpeed: 1.5
-  fastwalkSpeed: 3
-  slowwalkSpeed: 1.5
-  strafeSpeed: 1
   rotationSpeed: 1
   Pause: {fileID: 0}
   paused: 0
@@ -357,8 +354,8 @@ MonoBehaviour:
   canAttack: 0
   handGunAcquired: 1
   animating: 0
-  knifeDamage: 20
-  handGunDamage: 50
+  knifeDamage: 100
+  handGunDamage: 100
   damage: 0
   ammos: 0
   bullets: {fileID: 0}
