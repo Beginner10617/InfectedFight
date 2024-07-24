@@ -111,7 +111,6 @@ public class zombieControl : MonoBehaviour
             MoveForward();
         }
         if(isAttacking){
-            Debug.Log("Zombie Attacking");
             player.GetComponent<PlayerHealth>().hitpoint -= damage * Time.deltaTime;
             if(playerAudio.isPlaying == false){
                 playerAudio.PlayOneShot(audioManager.PlayerHurt);

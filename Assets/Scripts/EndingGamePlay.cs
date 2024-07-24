@@ -11,6 +11,7 @@ public class EndingGamePlay : MonoBehaviour
     public GameObject GameOver;
     public GameObject player;
     string path ;
+    public Transform Zombies;
     void Start()
     {
         GameOver.SetActive(false);
@@ -32,6 +33,18 @@ public class EndingGamePlay : MonoBehaviour
             if(player.GetComponent<PlayerHealth>().hitpoint <= 0)
             {
                 gameOver = true;
+                GameOver.SetActive(true);
+                Debug.Log(gameObject);
+                int m = 0;
+                foreach(Transform child in Zombies)
+                {
+                    if(m>0)
+                    {
+                        Destroy(child.gameObject);
+                    }
+                    m+=1;
+                }
+
             }
             if(gameOver)
             {
@@ -39,17 +52,19 @@ public class EndingGamePlay : MonoBehaviour
                 {
                     File.Delete(path);
                 }
-                player.transform.position = transform.position;
-                player.transform.localScale -= new Vector3(1, 1, 1) * speed * Time.deltaTime;
+                gameObject.SetActive(false);
+                Debug.Log(gameObject.activeSelf);
+                if(player.GetComponent<PlayerHealth>().hitpoint > 0)  
+                {
+                    player.transform.position = transform.position;
+                    player.transform.localScale -= new Vector3(1, 1, 1) * speed * Time.deltaTime;
+                }
                 if(player.transform.localScale.x <= 0)
                 {
                     gameOver = false;
                     Debug.Log("Game Over");
                     //
-                    if(player.GetComponent<PlayerHealth>().hitpoint <= 0)
-                    {
-                        GameOver.SetActive(true);
-                    }
+
                 }
             }
         }
