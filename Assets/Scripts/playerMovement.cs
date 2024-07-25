@@ -66,7 +66,7 @@ public class playerMovement : MonoBehaviour
             
         if(!paused)
         {
-            if(Input.GetKeyDown(KeyCode.P)){
+            if(Input.GetKeyDown(KeyCode.Escape)){
                 paused = true;
                 Debug.Log("Paused");
                 Pause.SetActive(true);

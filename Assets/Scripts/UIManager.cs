@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     {
         startingPoint = new Vector3(1.5f, -79, -1);
         LoadingScreen.SetActive(false);
-        Cursor.SetCursor(cursorSprite, hotspot, cursorMode);
+//        Cursor.SetCursor(cursorSprite, hotspot, cursorMode);
         manager = GameObject.FindWithTag("MainCamera").GetComponent<cameraManager>();
         manager.enabled = false;
         audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
@@ -59,6 +59,7 @@ public class UIManager : MonoBehaviour
     }
     public void Play()
     {
+       // Cursor.visible = false;
         foreach(Transform child in transform)
         {
             child.gameObject.SetActive(false);
@@ -75,7 +76,9 @@ public class UIManager : MonoBehaviour
     {}
 
     public void Quit()
-    {}
+    {
+        Application.Quit();
+    }
 
     // Update is called once per frame
     void Update()
