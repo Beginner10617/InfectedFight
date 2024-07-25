@@ -44,6 +44,7 @@ public class EndingGamePlay : MonoBehaviour
                     }
                     m+=1;
                 }
+                player.GetComponent<playerMovement>().paused = true;
 
             }
             if(gameOver)

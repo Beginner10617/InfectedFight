@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     GameData gameData;
     public GameObject Zombies;
     public GameObject GamePlay;
+    public GameObject GameOver;
     void Start()
     {
         startingPoint = new Vector3(1.5f, -79, -1);
@@ -118,5 +119,6 @@ public class UIManager : MonoBehaviour
         }
         LoadingScreen.SetActive(false);
         GamePlay.SetActive(false);
+        GameOver.SetActive(false);
     }
 }

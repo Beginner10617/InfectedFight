@@ -16,9 +16,11 @@ public class playerMovement : MonoBehaviour
     public float rotationSpeed = 90f;
     public GameObject Pause;
     public bool paused;
+    float angle;
     // Start is called before the first frame update
     void Start()
     {
+        angle = transform.eulerAngles.z;
         paused = false;
         UpperBody = GameObject.FindWithTag("UpperBody");
         if (UpperBody == null) {
@@ -57,9 +59,11 @@ public class playerMovement : MonoBehaviour
         audioManager.PlayerPlayAudio(audioManager.walk1);
         }
     }
-    // Update is called once per frame
+    
     void Update()
-    {
+    {            
+        transform.Rotate(0,0,(angle-transform.eulerAngles.z)*Time.deltaTime*10);
+            
         if(!paused)
         {
             if(Input.GetKeyDown(KeyCode.P)){
@@ -83,19 +87,22 @@ public class playerMovement : MonoBehaviour
                 }
 
                 if(Input.GetKey(KeyCode.W)){
-                    transform.eulerAngles = new Vector3(0, 0, 90);
+                    angle = 90f;
                     MoveForward();
                 }
                 if(Input.GetKey(KeyCode.S)){
-                    transform.eulerAngles = new Vector3(0, 0, 270);
+                    //
+                    angle = 270f;
                     MoveForward();
                 }
                 if(Input.GetKey(KeyCode.D)){
-                    transform.eulerAngles = new Vector3(0, 0, 0);
+                    //
+                    angle = 0f;
                     MoveForward();
                 }
                 if(Input.GetKey(KeyCode.A)){
-                    transform.eulerAngles = new Vector3(0, 0, 180);
+                    //
+                    angle = 180f;
                     MoveForward();
                 }
             
