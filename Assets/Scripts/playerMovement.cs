@@ -92,7 +92,7 @@ public class playerMovement : MonoBehaviour
                 }
                 else if(Input.GetKey(KeyCode.S)){
                     //
-                    if(angle == 180)
+                    if(angle == 180 || angle == 90)
                     {
                         angle = 270f;
                     }
