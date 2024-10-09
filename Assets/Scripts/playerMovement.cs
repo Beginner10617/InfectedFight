@@ -62,9 +62,9 @@ public class playerMovement : MonoBehaviour
     
     void Update()
     {            
-        transform.Rotate(0,0,(angle-transform.eulerAngles.z)*Time.deltaTime*10);
+        transform.eulerAngles = new Vector3(0,0,Mathf.LerpAngle(transform.eulerAngles.z, angle, Time.deltaTime*10));
             
-        if(!paused)
+        if(true)
         {
             if(Input.GetKeyDown(KeyCode.Escape)){
                 paused = true;
@@ -90,17 +90,24 @@ public class playerMovement : MonoBehaviour
                     angle = 90f;
                     MoveForward();
                 }
-                if(Input.GetKey(KeyCode.S)){
+                else if(Input.GetKey(KeyCode.S)){
                     //
-                    angle = 270f;
+                    if(angle == 180)
+                    {
+                        angle = 270f;
+                    }
+                    else if(angle == 0)
+                    {
+                        angle = -90f;
+                    }
                     MoveForward();
                 }
-                if(Input.GetKey(KeyCode.D)){
+                else if(Input.GetKey(KeyCode.D)){
                     //
                     angle = 0f;
                     MoveForward();
                 }
-                if(Input.GetKey(KeyCode.A)){
+                else if(Input.GetKey(KeyCode.A)){
                     //
                     angle = 180f;
                     MoveForward();

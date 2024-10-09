@@ -121,7 +121,7 @@ public class PlayerHealth : MonoBehaviour
         } 
         else if(damage != knifeDamage){damage=knifeDamage;} 
         //updating healthBar
-        healthBar.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(5 * hitpoint, 25) ;
+        healthBar.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(hitpoint, 5) ;
     }
 
     void Update()
